@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  /* NBI-Youth brand — pulled from the club logo */
+  --color-cream: #f8f7f1;
+  --color-mint: #e9f2e7;
+  --color-forest: #0c3b2c;
+  --color-pine: #14523c;
+  --color-moss: #1d6b4c;
+  --color-leaf: #63a744;
+  --color-sprout: #8cc63f;
+  --color-teal: #35b0a2;
+  --color-lagoon: #2e6f80;
+  --color-coral: #e8604c;
+  --color-sun: #f2b33d;
+  --color-ink: #22302a;
+
+  --font-display: "Mitr", "Anuphan", sans-serif;
+  --font-body: "Anuphan", "Mitr", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background-color: var(--color-leaf);
+  color: white;
+}
+
+/* --- Motion --- */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-rise { animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-float { animation: float-slow 7s ease-in-out infinite; }
+.animate-ticker { animation: ticker 40s linear infinite; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Grain overlay for hero atmosphere */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.06'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
